@@ -179,3 +179,5 @@ a:hover { @apply text-qwn-gold; }
 .gold-shimmer-once.play {
   animation: gold-shimmer-once 2.8s linear forwards;
 }
+
+

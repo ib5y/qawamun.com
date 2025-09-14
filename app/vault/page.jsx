@@ -114,7 +114,7 @@ export default function VaultPage() {
           </ul>
         </div>
 
-        {/* Wallpapers — replaces Signals */}
+        {/* Wallpapers */}
         <div className="mt-16">
             <h2 className="font-[var(--font-league)] text-2xl md:text-3xl uppercase tracking-[0.16em]">
               Banners of Resolve

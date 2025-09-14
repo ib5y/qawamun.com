@@ -80,7 +80,7 @@ export default function Hero() {
         </h1>
 
         <p className="mt-4 text-neutral-300 text-sm md:text-base max-w-2xl mx-auto animate-softfade">
-          QW̄N — Qaw̄amūn. Stand firm. By Allāh and the Qur̄’ān.
+          Stand firm. By Allāh and the Qur̄’ān.
         </p>
 
         <div className="mt-8 flex items-center justify-center gap-4">
