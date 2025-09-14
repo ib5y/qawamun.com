@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+/* ========= QW̄N THEME (Tailwind v4, no-config mode) ========= */
+@theme {
+  /* Colors */
+  --color-qwn-ink: #0A0A0A;
+  --color-qwn-carbon: #0F0F10;
+  --color-qwn-night: #111112;
+  --color-qwn-obsidian: #141416;
+  --color-qwn-graphite: #1A1B1E;
+  --color-qwn-smoke: #232429;
+  --color-qwn-steel: #2C2E34;
+  --color-qwn-ash: #3A3D45;
+  --color-qwn-gold: #C7A76B;
+  --color-qwn-ember: #C26B2A;
+
+  /* Shadows */
+  --shadow-qwn-soft: 0 10px 40px rgba(0,0,0,0.35);
+
+  /* Fonts (kopplade till next/font-variabler från layout.jsx) */
+  --font-display: var(--font-league), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  --font-interblk: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
+/* ===== Base ===== */
+:root {
+  --bg: #0a0a0a;
+  --ink: #e9e9ee;
+  --radial: radial-gradient(1200px 600px at 50% -10%, rgba(199,167,107,0.10), transparent 60%);
+  --gradient: linear-gradient(180deg, rgba(10,10,10,0.0) 0%, rgba(10,10,10,0.6) 60%, rgba(10,10,10,0.95) 100%);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @apply font-sans text-[15px] leading-relaxed;
+  background-image: var(--gradient), var(--radial);
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, cover;
+}
+
+.container-padding { @apply px-5 sm:px-6 md:px-8 lg:px-10; }
+a { @apply text-neutral-200 transition-colors; }
+a:hover { @apply text-qwn-gold; }
+
+/* ===== Buttons (premium) ===== */
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-md border px-5 py-3 font-display;
+  border-color: var(--color-qwn-gold);
+  background: transparent;
+  color: #ffffff;
+  transition: transform 150ms ease, box-shadow 150ms ease, opacity 150ms ease, background 150ms ease, color 150ms ease;
+}
+.btn-primary:hover { opacity: 0.9; box-shadow: 0 10px 30px rgba(199,167,107,0.22); }
+.btn-primary:active { transform: translateY(1px) scale(0.99); }
+.btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(199,167,107,0.6); }
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center rounded-md border px-5 py-3 font-display;
+  @apply border-white/14 bg-transparent text-neutral-100;
+  transition: background 150ms ease, border-color 150ms ease, transform 150ms ease;
+}
+.btn-ghost:hover { @apply bg-white/[0.06] border-white/20; }
+.btn-ghost:active { transform: translateY(1px) scale(0.99); }
+.btn-ghost:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(199,167,107,0.6); }
+
+/* ===== Overlays (Hero) ===== */
+.bg-qwn-gradient { background: linear-gradient(180deg, rgba(10,10,10,0.0) 0%, rgba(10,10,10,0.62) 60%, rgba(10,10,10,0.96) 100%); }
+.bg-qwn-radial   { background: radial-gradient(1200px 600px at 50% -10%, rgba(199,167,107,0.10), transparent 60%); }
+
+/* ===== Cinematic image animation ===== */
+
+/* Tydlig dolly-in: större zoom/pan/rotation (syns garanterat) */
+@keyframes cinema-pan {
+  0%   { transform: scale(1.00) translateX(0%)    translateY(0%)    rotate(0deg); }
+  30%  { transform: scale(1.06) translateX(-0.8%) translateY(0.2%)  rotate(-0.18deg); }
+  100% { transform: scale(1.12) translateX(-1.8%) translateY(0.8%)  rotate(-0.35deg); }
+}
+.animate-cinema-pan {
+  animation: cinema-pan 28s ease-in-out both;
+  will-change: transform;
+}
+
+/* Engångs filmisk ljussvep */
+@keyframes light-sweep {
+  0%   { transform: translateX(-130%); opacity: 0; }
+  12%  { opacity: .18; }
+  50%  { opacity: .08; }
+  100% { transform: translateX(130%); opacity: 0; }
+}
+.light-sweep {
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  background: linear-gradient(100deg, transparent 0%, rgba(255,255,255,0.05) 40%, rgba(255,255,255,0.22) 50%, rgba(255,255,255,0.06) 60%, transparent 100%);
+  filter: blur(2px);
+}
+.animate-light-sweep {
+  animation: light-sweep 3.6s ease-out 600ms both;
+}
+
+/* Veil (mjuk fade-in av mörk filmisk voile) */
+@keyframes veil-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+.animate-veil-in { animation: veil-in 900ms ease-out both; }
+
+/* Titel & copy (mjuka, premium) */
+@keyframes softline {
+  0%   { opacity: 0; transform: translateY(10px) scale(0.985); }
+  100% { opacity: 1; transform: translateY(0)    scale(1); }
+}
+.animate-softline {
+  animation: softline 1100ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+@keyframes softfade {
+  0%   { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-softfade {
+  animation: softfade 800ms ease-out both;
+  will-change: opacity, transform;
+}
+
+/* Scroll-cue */
+@keyframes cue { 0%,100% { transform: translateY(0); opacity: .55; } 50% { transform: translateY(6px); opacity: 1; } }
+.animate-cue { animation: cue 2.2s ease-in-out infinite; }
+
+/* Reduced motion respekt */
+@media (prefers-reduced-motion: reduce) {
+  .animate-cinema-pan,
+  .animate-light-sweep,
+  .animate-veil-in,
+  .animate-softline,
+  .animate-softfade,
+  .animate-cue { animation: none !important; }
+}
+
+/* ===== Rolling banner ===== */
+@keyframes scroll-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  display: inline-flex;
+  animation: scroll-horizontal 20s linear infinite;
+  will-change: transform;
+}
+
+@keyframes gold-shimmer-once {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.gold-shimmer-once {
+  background: linear-gradient(90deg, #c7a76b 0%, #fff7da 50%, #c7a76b 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gold-shimmer-once.play {
+  animation: gold-shimmer-once 2.8s linear forwards;
+}
